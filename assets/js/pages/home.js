@@ -21,30 +21,31 @@ export async function renderHome() {
     /**
     * Eliminar
     */
+    const deleteButtons = document.querySelectorAll(".delete-btn");
 
-    const deleteButton = document.querySelectorAll(".delete-btn");
+deleteButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        const id = button.dataset.id;
+        const confirmDelete = confirm(
+            "¿Seguro que quieres eliminar este personaje?"
+        );
+        if (!confirmDelete) return;
+        //guardar en localStorage
+        const deleteCharacters =
+            JSON.parse(localStorage.getItem("deleteCharacters")) || [];
 
-    deleteButton.forEach(button => {
-        button.addEventListener("click", () => {
-            const confirmDelete = confirm(
-                "¿Seguro que quieres eliminar este personaje?"
-            );
+        if (!deleteCharacters.includes(id)) {
+            deleteCharacters.push(id);
+        }
+        localStorage.setItem(
+            "deleteCharacters",
+            JSON.stringify(deleteCharacters)
+        );
+        // ocultar en pantalla
+        const card = document.getElementById(`character-${id}`);
+        if (card) card.style.display = "none";
 
-            if (!confirmDelete) return;
-            const id = button.dataset.id;
-            const card = document.getElementById(`character-${id}`);
-            card.style.display = "none";
-            const deleteCharacters = JSON.parse(localStorage.getItem("deleteCharacters")) || [];
-
-            if (!deleteCharacters.include(id)){
-                deleteCharacters.push(id);
-            }
-            
-            localStorage.setItem("deleteCharacters", JSON.stringify(deleteCharacters))
-            alert("Personaje eliminado");
-
-        });
-
+        alert("Personaje eliminado");
     });
-
+});
 }
