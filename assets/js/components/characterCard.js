@@ -6,10 +6,12 @@ export function characterCard(character) {
 
     return `
         <article class="card">
-            <img
+        
+        <img
                 src="${character.image}"
                 alt="${character.name}"
             >
+            
 
             <div class="card-body">
                 <h3>${character.name}</h3>
