@@ -25,23 +25,22 @@ export async function renderHome() {
     const deleteButton = document.querySelectorAll(".delete-btn");
 
     deleteButton.forEach(button => {
-
         button.addEventListener("click", () => {
-
             const confirmDelete = confirm(
                 "¿Seguro que quieres eliminar este personaje?"
             );
 
             if (!confirmDelete) return;
-
             const id = button.dataset.id;
-
-            const card = document.getElementById(
-                `character-${id}`
-            );
-
+            const card = document.getElementById(`character-${id}`);
             card.style.display = "none";
+            const deleteCharacters = JSON.parse(localStorage.getItem("deleteCharacters")) || [];
 
+            if (!deleteCharacters.include(id)){
+                deleteCharacters.push(id);
+            }
+            
+            localStorage.setItem("deleteCharacters", JSON.stringify(deleteCharacters))
             alert("Personaje eliminado");
 
         });
