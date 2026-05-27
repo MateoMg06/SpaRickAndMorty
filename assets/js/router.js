@@ -5,14 +5,16 @@
 import { renderHome } from './pages/home.js';
 import { renderContacts } from './pages/contacts.js';
 import { renderAbout } from './pages/about.js';
-
+import { renderUbicacion } from './pages/ubicacion.js';
 /**
  * Rutas disponibles
  */
 const routes = {
     '/': renderHome,
     '/contacts': renderContacts,
-    '/about': renderAbout
+    '/about': renderAbout,
+    '/Ubicaciones': renderUbicacion
+
 
 };
 

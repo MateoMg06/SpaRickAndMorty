@@ -1,7 +1,18 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
     background: #f4f4f4;
+    background-image: url("../Img/ChatGPT\ Image\ 27\ may\ 2026\,\ 12_10_51\ p.m..png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    min-height: 100vh;
 }
 
 .navbar {

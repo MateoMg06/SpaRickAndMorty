@@ -19,3 +19,14 @@ export async function getCharacters() {
         return [];
     }
 }
+
+export async function getLocation() {
+    try {
+        const response = await httpClient.get('/location');
+        return response.data.results;
+
+    } catch (error) {
+        console.error(error);
+        return [];
+    }
+}
