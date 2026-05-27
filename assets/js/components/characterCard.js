@@ -5,7 +5,7 @@
 export function characterCard(character) {
 
     return `
-        <article class="card">
+        <article class="card" id="character-${character.id}">
             <img
                 src="${character.image}"
                 alt="${character.name}"

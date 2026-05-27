@@ -17,4 +17,35 @@ export async function renderHome() {
     container.innerHTML = characters
         .map(character => characterCard(character))
         .join('');
+
+    /**
+    * Eliminar
+    */
+
+    const deleteButton = document.querySelectorAll(".delete-btn");
+
+    deleteButton.forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            const confirmDelete = confirm(
+                "¿Seguro que quieres eliminar este personaje?"
+            );
+
+            if (!confirmDelete) return;
+
+            const id = button.dataset.id;
+
+            const card = document.getElementById(
+                `character-${id}`
+            );
+
+            card.style.display = "none";
+
+            alert("Personaje eliminado");
+
+        });
+
+    });
+
 }
