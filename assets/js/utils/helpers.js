@@ -14,3 +14,5 @@ export async function loadHTML(path) {
         return '<h2>Error cargando contenido</h2>';
     }
 }
+
+

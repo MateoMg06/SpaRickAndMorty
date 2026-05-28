@@ -4,7 +4,7 @@
 
 import { renderHome } from './pages/home.js';
 import { renderContacts } from './pages/contacts.js';
-import { renderAbout } from './pages/about.js';
+import { renderEpisodio } from './pages/episodio.js';
 
 /**
  * Rutas disponibles
@@ -12,7 +12,7 @@ import { renderAbout } from './pages/about.js';
 const routes = {
     '/': renderHome,
     '/contacts': renderContacts,
-    '/about': renderAbout
+    '/episodios': renderEpisodio
 
 };
 
