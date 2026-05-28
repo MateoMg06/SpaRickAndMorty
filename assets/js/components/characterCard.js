@@ -3,6 +3,14 @@
  */
 
 export function characterCard(character) {
+  const status = character.status || "unknown";
+  const statusClass =
+    status.toLowerCase() === "alive"
+      ? "alive"
+      : status.toLowerCase() === "dead"
+        ? "dead"
+        : "unknown-s";
+
   return `
     <article class="card">
       <div class="img-wrap">
@@ -20,7 +28,8 @@ export function characterCard(character) {
         </div>
 
         <div class="card-meta">
-          ${character.status.toUpperCase()}
+          <span class="status-dot ${statusClass}"></span>
+          <span>${status.toUpperCase()}</span>
         </div>
 
         <div class="card-loc">

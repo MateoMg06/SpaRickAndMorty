@@ -7,8 +7,10 @@ export async function loadNavbar() {
     const navbar = document.getElementById('navbar');
 
     navbar.innerHTML = `
-        <nav class="navbar">
-            <a class="nav-item active" href="/" data-section="inicio">
+         <a class="brand" href="/" aria-label="Multiverse Flux">
+        </a>
+        <nav class="side-nav" aria-label="Navegacion principal">
+            <a class="nav-item" href="/" data-section="inicio">
             <span class="nav-icon portal-mini"></span>
             <span>Inicio</span>
             </a>
@@ -28,4 +30,24 @@ export async function loadNavbar() {
 
         </nav>
     `;
+
+    updateActiveNavbar();
+}
+
+export function updateActiveNavbar(path = window.location.pathname) {
+    const sectionByPath = {
+        '/': 'inicio',
+        '/personajes': 'personajes',
+        '/episodios': 'episodios',
+        '/planetas': 'planetas',
+    };
+
+    const activeSection = sectionByPath[path] || 'inicio';
+
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.classList.toggle(
+            'active',
+            item.dataset.section === activeSection
+        );
+    });
 }

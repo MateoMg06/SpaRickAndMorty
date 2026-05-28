@@ -22,6 +22,8 @@ export async function renderPersonajes() {
     const btnCerrar = document.getElementById('cerrar');
     const popup = document.getElementById('miPopup');
 
+    if (!btnAbrir || !btnCerrar || !popup) return;
+
     btnAbrir.addEventListener('click', () => {
         popup.showModal(); // Despliega la ventana
     });

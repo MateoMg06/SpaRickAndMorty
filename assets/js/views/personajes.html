@@ -1,8 +1,22 @@
-<section>
-    <h1>Rick and Morty Characters</h1>
-    
-    <section >
+<section class="database-view">
+    <div class="view-toolbar">
+        <button class="add-character-btn" id="abrir" type="button">+ AÑADIR PERSONAJE</button>
+    </div>
 
+    <header class="view-console-header">
+        <div>
+            <h1>// CHARACTERS_DB //</h1>
+            <p>Registros API disponibles para exploracion.</p>
+        </div>
+    </header>
+
+    <section class="local-characters-section">
+        <h2>// MIS PERSONAJES //</h2>
+        <div class="local-characters-empty"></div>
     </section>
-    <div id="characters-container" class="card-grid "></div>
+
+    <section class="api-characters-section">
+        <h2>// PERSONAJES API //</h2>
+        <div id="characters-container" class="card-grid"></div>
+    </section>
 </section>

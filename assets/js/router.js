@@ -7,6 +7,7 @@ import { renderInicio } from './pages/inicio.js';
 import { renderContacts } from './pages/contacts.js';
 import { renderAbout } from './pages/about.js';
 import { renderUbicacion } from './pages/ubicacion.js';
+import { updateActiveNavbar } from './components/navbar.js';
 /**
  * Rutas disponibles
  */
@@ -14,10 +15,7 @@ const routes = {
     '/':renderInicio,
     '/personajes': renderPersonajes,
     '/episodios': renderContacts,
-    '/about': renderAbout,
-    '/Ubicaciones': renderUbicacion
-
-
+    '/planetas': renderUbicacion,
 };
 
 /**
@@ -27,6 +25,7 @@ export async function router() {
 
     // Obtiene ruta real
     const path = window.location.pathname;
+    updateActiveNavbar(path);
     // Busca render
     const render = routes[path];
     if (render) {
