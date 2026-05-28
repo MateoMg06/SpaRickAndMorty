@@ -4,8 +4,7 @@
 
 import { renderPersonajes } from './pages/home.js';
 import { renderInicio } from './pages/inicio.js';
-import { renderContacts } from './pages/contacts.js';
-import { renderAbout } from './pages/about.js';
+import { renderEpisodio } from './pages/episodio.js';
 import { renderUbicacion } from './pages/ubicacion.js';
 import { updateActiveNavbar } from './components/navbar.js';
 /**
@@ -14,7 +13,7 @@ import { updateActiveNavbar } from './components/navbar.js';
 const routes = {
     '/':renderInicio,
     '/personajes': renderPersonajes,
-    '/episodios': renderContacts,
+    '/episodios': renderEpisodio,
     '/planetas': renderUbicacion,
 };
 
