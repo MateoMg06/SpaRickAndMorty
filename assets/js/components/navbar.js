@@ -8,10 +8,22 @@ export async function loadNavbar() {
 
     navbar.innerHTML = `
         <nav class="navbar">
-            <a href="/" data-link>Home</a>
-            <a href="/contacts" data-link>Contactos</a>
-            <a href="/about" data-link> Quiénes Somos</a>
-            <a href="/Ubicaciones"> Ubicaciones</a>
+            <a class="nav-item active" href="/" data-section="inicio">
+            <span class="nav-icon portal-mini"></span>
+            <span>Inicio</span>
+            </a>
+            <a class="nav-item" href="/personajes" data-section="personajes">
+            <span class="nav-icon icon-face"></span>
+            <span>Personajes</span>
+           </a>
+           <a class="nav-item" href="/episodios" data-section="episodios">
+            <span class="nav-icon icon-tv"></span>
+            <span>Episodios</span>
+          </a>
+          <a class="nav-item" href="/planetas" data-section="planetas">
+            <span class="nav-icon icon-planet"></span>
+            <span>Planetas</span>
+          </a>
 
 
         </nav>

@@ -2,7 +2,8 @@
  * Router SPA
  */
 
-import { renderHome } from './pages/home.js';
+import { renderPersonajes } from './pages/home.js';
+import { renderInicio } from './pages/inicio.js';
 import { renderContacts } from './pages/contacts.js';
 import { renderAbout } from './pages/about.js';
 import { renderUbicacion } from './pages/ubicacion.js';
@@ -10,8 +11,9 @@ import { renderUbicacion } from './pages/ubicacion.js';
  * Rutas disponibles
  */
 const routes = {
-    '/': renderHome,
-    '/contacts': renderContacts,
+    '/':renderInicio,
+    '/personajes': renderPersonajes,
+    '/episodios': renderContacts,
     '/about': renderAbout,
     '/Ubicaciones': renderUbicacion
 
