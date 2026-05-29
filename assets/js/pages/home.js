@@ -32,6 +32,11 @@ export async function renderPersonajes() {
   const btnCancelar = document.getElementById("cancelar");
   const popup = document.getElementById("miPopup");
   const form = document.getElementById("character-form");
+  const deletedCharacters = getDeletedCharacters();
+  
+    const visibleCharacters = characters.filter(
+        character => !deletedCharacters.includes(String(character.id))
+    );
 
   if (!btnAbrir || !btnCerrar || !popup) return;
 
