@@ -35,6 +35,7 @@ export function characterCard(character) {
         <div class="card-loc">
           <span>${character.location?.name || "UNKNOWN"}</span>
         </div>
+        <button class="delete-btn" data-id="${character.id}">Eliminar</button>
       </div>
     </article>
   `;
