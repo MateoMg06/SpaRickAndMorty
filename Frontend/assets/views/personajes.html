@@ -12,7 +12,7 @@
 
     <section class="local-characters-section">
         <h2>// MIS PERSONAJES //</h2>
-        <div class="local-characters-empty"></div>
+        <div id="local-characters" class="card-grid"></div>
     </section>
 
     <section class="api-characters-section">
@@ -34,17 +34,17 @@
         <div class="character-form-body">
             <label>
                 <span>NOMBRE</span>
-                <input type="text" placeholder="Ej: Toxic Summer">
+                <input id="name" type="text" placeholder="Ej: Toxic Summer">
             </label>
 
             <label>
                 <span>ESPECIE</span>
-                <input type="text" placeholder="Human, Alien, Robot...">
+                <input id="especie" type="text" placeholder="Human, Alien, Robot...">
             </label>
 
             <label>
                 <span>ESTADO</span>
-                <select>
+                <select id="estado" value="">
                     <option>Alive</option>
                     <option>Dead</option>
                     <option>Unknown</option>
@@ -53,7 +53,7 @@
 
             <label>
                 <span>GENERO</span>
-                <select>
+                <select id="genero" value="">
                     <option>Female</option>
                     <option>Male</option>
                     <option>Genderless</option>

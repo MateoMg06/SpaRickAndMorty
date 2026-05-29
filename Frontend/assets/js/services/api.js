@@ -2,6 +2,8 @@
  * Servicio API Rick and Morty
  */
 
+const API_JSON = "http://localhost:3002";
+
 import httpClient from './httpClient.js';
 
 /**
@@ -12,7 +14,7 @@ import httpClient from './httpClient.js';
 export async function getCharacters() {
     try {
         const response = await httpClient.get('/character');
-        return response.data.results;
+        return response.data.results || [];
 
     } catch (error) {
         console.error(error);
@@ -39,4 +41,14 @@ export async function getEpisodio() {
         console.error(error);
         return [];
     }
+}
+
+export async function postNewCharacter(character) {
+    const res = await fetch(`${API_JSON}/character`, {
+        method:'POST',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify(character)
+    })
 }

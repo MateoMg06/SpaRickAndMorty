@@ -9,7 +9,7 @@ export async function renderEpisodio() {
 
     const content = document.getElementById('content');
     content.innerHTML = await loadHTML(
-        './assets/js/views/episodio.html'
+        './assets/views/episodio.html'
     );
     const container = document.getElementById(
         'episodios-container'
