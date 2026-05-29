@@ -1,6 +1,7 @@
 import { loadHTML } from '../utils/helpers.js';
 import { getCharacters, postNewCharacter } from '../services/api.js';
 import { characterCard } from '../components/characterCard.js';
+import { alertaExitosa, alertaConfirmacion, alertaError } from '../utils/alerts.js';
 
 /**
  * Renderiza Home
@@ -42,14 +43,58 @@ export async function renderPersonajes() {
   /**
    * Eliminar
    */
+
+
+
+
+
+
+
   const deleteButtons = document.querySelectorAll(".delete-btn");
 
+
+
+
+
+/* tableBody.addEventListener("click", async (e) => {
+    
+    if (e.target.closest(".btn-eliminar")) {
+        const id = e.target.closest(".btn-eliminar").dataset.id
+        const confirmado = await alertaConfirmacion()
+        if (confirmado) {
+            borrarProducto(id)
+        }
+    }
+
+    if (e.target.closest(".btn-editar")) {
+        const id = e.target.closest(".btn-editar").dataset.id
+        await prepararEdicion(id)
+    }
+})
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   deleteButtons.forEach((button) => {
-    button.addEventListener("click", () => {
+    button.addEventListener("click", async () => {
       const id = button.dataset.id;
-      const confirmDelete = confirm(
-        "Seguro que quieres eliminar este personaje?",
-      );
+      const confirmDelete = await alertaConfirmacion();
       if (!confirmDelete) return;
 
       const deletedCharacters = getDeletedCharacters();
@@ -62,7 +107,7 @@ export async function renderPersonajes() {
       const card = button.closest(".card");
       if (card) card.remove();
 
-      alert("Personaje eliminado");
+      alertaExitosa("Personaje eliminado");
     });
   });
 
