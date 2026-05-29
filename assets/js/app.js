@@ -13,6 +13,8 @@ import { router } from './router.js';
  * @param {string} url
  */
 export function navigateTo(url) {
+    if (window.location.pathname === url) return;
+
     history.pushState(null, null, url);
     router();
 }
@@ -28,11 +30,14 @@ window.addEventListener('DOMContentLoaded', async () => {
      * Intercepta links SPA
      */
     document.body.addEventListener('click', event => {
-        const target = event.target;
-        if (target.matches('[data-link]')) {
-            event.preventDefault();
-            navigateTo(target.href);
-        }
+        const link = event.target.closest('[data-link]');
+        if (!link) return;
+
+        const url = new URL(link.href);
+        if (url.origin !== window.location.origin) return;
+
+        event.preventDefault();
+        navigateTo(url.pathname);
     });
 });
 

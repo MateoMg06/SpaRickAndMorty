@@ -7,22 +7,22 @@ export async function loadNavbar() {
     const navbar = document.getElementById('navbar');
 
     navbar.innerHTML = `
-         <a class="brand" href="/" aria-label="Multiverse Flux">
+         <a class="brand" href="/" data-link aria-label="Multiverse Flux">
         </a>
         <nav class="side-nav" aria-label="Navegacion principal">
-            <a class="nav-item" href="/" data-section="inicio">
+            <a class="nav-item" href="/" data-link data-section="inicio">
             <span class="nav-icon portal-mini"></span>
             <span>Inicio</span>
             </a>
-            <a class="nav-item" href="/personajes" data-section="personajes">
+            <a class="nav-item" href="/personajes" data-link data-section="personajes">
             <span class="nav-icon icon-face"></span>
             <span>Personajes</span>
            </a>
-           <a class="nav-item" href="/episodios" data-section="episodios">
+           <a class="nav-item" href="/episodios" data-link data-section="episodios">
             <span class="nav-icon icon-tv"></span>
             <span>Episodios</span>
           </a>
-          <a class="nav-item" href="/planetas" data-section="planetas">
+          <a class="nav-item" href="/planetas" data-link data-section="planetas">
             <span class="nav-icon icon-planet"></span>
             <span>Planetas</span>
           </a>
