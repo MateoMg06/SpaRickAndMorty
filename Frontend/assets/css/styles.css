@@ -1101,6 +1101,167 @@ p {
   transform: translateY(-1px);
 }
 
+/* SweetAlert2 */
+
+.swal2-container {
+  z-index: 9999;
+}
+
+.rm-toast,
+.rm-alert {
+  border: 1px solid rgba(141, 255, 84, 0.42);
+  color: var(--text);
+  background:
+    linear-gradient(145deg, rgba(3, 22, 23, 0.98), rgba(0, 8, 9, 0.96)),
+    repeating-linear-gradient(
+      0deg,
+      rgba(141, 255, 84, 0.035) 0 1px,
+      transparent 1px 5px
+    );
+  box-shadow:
+    0 0 28px rgba(141, 255, 84, 0.16),
+    0 18px 70px rgba(0, 0, 0, 0.55),
+    inset 0 0 0 1px rgba(53, 245, 208, 0.08);
+  font-family: var(--font-ui);
+}
+
+.rm-toast {
+  padding: 12px 16px;
+  clip-path: polygon(
+    10px 0,
+    calc(100% - 12px) 0,
+    100% 12px,
+    100% calc(100% - 12px),
+    calc(100% - 10px) 100%,
+    10px 100%,
+    0 calc(100% - 10px),
+    0 10px
+  );
+}
+
+.rm-toast-title {
+  color: var(--text);
+  font-family: "Share Tech Mono", monospace;
+  font-size: 0.9rem;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.rm-toast-progress {
+  background: linear-gradient(90deg, var(--green), var(--cyan));
+}
+
+.rm-toast .swal2-success-ring {
+  border-color: rgba(141, 255, 84, 0.38);
+}
+
+.rm-toast .swal2-success-line-tip,
+.rm-toast .swal2-success-line-long {
+  background-color: var(--green);
+}
+
+.rm-toast .swal2-x-mark-line-left,
+.rm-toast .swal2-x-mark-line-right {
+  background-color: var(--red);
+}
+
+.rm-alert {
+  width: min(440px, calc(100vw - 32px));
+  padding: 30px 28px 26px;
+  border-radius: 10px;
+}
+
+.rm-alert::before,
+.rm-alert::after {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+  content: "";
+}
+
+.rm-alert::before {
+  top: 12px;
+  right: 12px;
+  border-top: 1px solid rgba(141, 255, 84, 0.72);
+  border-right: 1px solid rgba(141, 255, 84, 0.72);
+}
+
+.rm-alert::after {
+  bottom: 12px;
+  left: 12px;
+  border-bottom: 1px solid rgba(53, 245, 208, 0.56);
+  border-left: 1px solid rgba(53, 245, 208, 0.56);
+}
+
+.rm-alert-title {
+  color: var(--green);
+  font-family: Bangers, Impact, system-ui, sans-serif;
+  font-size: clamp(2rem, 8vw, 2.7rem);
+  font-weight: 400;
+  letter-spacing: 1px;
+  line-height: 0.95;
+  text-shadow:
+    0 0 18px rgba(141, 255, 84, 0.42),
+    2px 2px 0 rgba(15, 65, 32, 0.9);
+  text-transform: uppercase;
+}
+
+.rm-alert-text {
+  color: rgba(241, 255, 244, 0.82);
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+.rm-alert-icon {
+  border-color: rgba(255, 139, 61, 0.68);
+  color: var(--orange);
+  box-shadow: 0 0 22px rgba(255, 139, 61, 0.18);
+}
+
+.rm-alert-actions {
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.rm-alert-confirm,
+.rm-alert-cancel {
+  min-height: 42px;
+  padding: 0 18px;
+  border: 1px solid rgba(141, 255, 84, 0.58);
+  border-radius: 8px;
+  color: var(--text);
+  background: rgba(1, 13, 12, 0.9);
+  font-family: "Share Tech Mono", monospace;
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.rm-alert-confirm {
+  border-color: rgba(255, 75, 107, 0.7);
+  color: #fff;
+  background: rgba(64, 10, 22, 0.9);
+  box-shadow: 0 0 16px rgba(255, 75, 107, 0.16);
+}
+
+.rm-alert-cancel {
+  color: var(--cyan);
+  border-color: rgba(53, 245, 208, 0.58);
+}
+
+.rm-alert-confirm:hover {
+  border-color: rgba(255, 75, 107, 1);
+  background: rgba(92, 13, 30, 0.96);
+}
+
+.rm-alert-cancel:hover {
+  border-color: rgba(53, 245, 208, 0.9);
+  background: rgba(8, 44, 42, 0.92);
+}
+
 .status-dot {
   width: 7px;
   height: 7px;

@@ -1,17 +1,28 @@
 import Swal from "sweetalert2"
+import "sweetalert2/dist/sweetalert2.min.css"
+import "../../css/alerts.css"
+
+const toastConfig = {
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timerProgressBar: true,
+    customClass: {
+        popup: "rm-toast",
+        title: "rm-toast-title",
+        timerProgressBar: "rm-toast-progress"
+    },
+    didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer
+        toast.onmouseleave = Swal.resumeTimer
+    }
+}
 
 
 export function alertaExitosa(mensaje) {
     Swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
+        ...toastConfig,
         timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.onmouseenter = Swal.stopTimer
-            toast.onmouseleave = Swal.resumeTimer
-        }
     }).fire({
         icon: "success",
         title: mensaje
@@ -20,15 +31,8 @@ export function alertaExitosa(mensaje) {
 
 export function alertaError(mensaje) {
     Swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
+        ...toastConfig,
         timer: 4000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.onmouseenter = Swal.stopTimer
-            toast.onmouseleave = Swal.resumeTimer
-        }
     }).fire({
         icon: "error",
         title: mensaje
@@ -41,10 +45,20 @@ export async function alertaConfirmacion(titulo = '¿Estás seguro?', texto = 'N
         text: texto,
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#4f46e5',
-        cancelButtonColor: '#e11d48',
+        background: '#020f10',
+        color: '#f1fff4',
         confirmButtonText: 'Sí, eliminar',
-        cancelButtonText: 'Cancelar'
+        cancelButtonText: 'Cancelar',
+        buttonsStyling: false,
+        customClass: {
+            popup: 'rm-alert',
+            title: 'rm-alert-title',
+            htmlContainer: 'rm-alert-text',
+            icon: 'rm-alert-icon',
+            actions: 'rm-alert-actions',
+            confirmButton: 'rm-alert-confirm',
+            cancelButton: 'rm-alert-cancel'
+        }
     })
     return result.isConfirmed
 }
