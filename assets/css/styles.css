@@ -1,6 +1,6 @@
 :root {
     --panel: rgba(5, 14, 15, 0.84);
-    --line: rgba(125, 255, 158, 0.2);
+    --line:  rgba(76, 238, 255, 0.28);
     --line-hot: rgba(151, 255, 84, 0.72);
     --green: #8dff54;
     --lime: #9cff33;
@@ -39,7 +39,7 @@ p {
 
 #app {
     display: grid;
-    grid-template-columns: 272px minmax(0, 1fr);
+    grid-template-columns: 250px minmax(0, 1fr);
     min-height: 100vh;
     padding: 8px 12px;
     gap: 24px;
@@ -49,8 +49,7 @@ p {
     position: relative;
     border: 1px solid var(--line);
     background:
-        linear-gradient(145deg, rgba(5, 24, 30, 0.78), rgba(2, 9, 12, 0.68)),
-        linear-gradient(90deg, rgba(156, 255, 51, 0.08), transparent 38%, rgba(56, 244, 255, 0.07));
+       linear-gradient(145deg, rgba(5, 24, 30, 0.78), rgba(2, 9, 12, 0.68)), linear-gradient(90deg, rgba(156, 255, 51, 0.08), transparent 38%, rgba(56, 244, 255, 0.07));
     box-shadow:
         inset 0 0 0 1px rgba(255, 255, 255, 0.03),
         0 18px 70px rgba(0, 0, 0, 0.38);
@@ -206,7 +205,7 @@ p {
 .nav-item.active {
     color: #fff;
     border-color: var(--line-hot);
-    background: linear-gradient(90deg, rgba(26, 132, 52, 0.58), rgba(2, 50, 28, 0.88));
+    background: linear-gradient(90deg, rgba(32, 128, 134, 0.58), rgba(2, 50, 28, 0.88));
     box-shadow: var(--shadow-green);
     transform: none;
 }
@@ -324,19 +323,21 @@ p {
   clip-path: polygon(0 16px, 16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%);
 }
 
-.database-view::before {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  content: "";
-  background:
-    linear-gradient(90deg, rgba(35, 255, 126, 0.08), transparent 25%, transparent 75%, rgba(35, 255, 126, 0.06)),
-    radial-gradient(circle at 28% 12%, rgba(35, 255, 126, 0.08), transparent 30%);
-}
-
 .database-view > * {
   position: relative;
   z-index: 1;
+}
+
+.database-view > h1 {
+  margin-bottom: 18px;
+  color: #35ff70;
+  font-family: "Share Tech Mono", monospace;
+  font-size: 1rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  line-height: 1.2;
+  text-transform: uppercase;
+  text-shadow: 0 0 12px rgba(35, 255, 126, 0.42);
 }
 
 .view-toolbar {
@@ -456,6 +457,200 @@ p {
   font-weight: 800;
   text-transform: uppercase;
   cursor: pointer;
+}
+
+/* Character modal */
+
+.character-modal {
+  width: min(720px, calc(100vw - 40px));
+  padding: 0;
+  overflow: visible;
+  border: 1px solid rgba(35, 255, 126, 0.28);
+  border-radius: 10px;
+  color: var(--text);
+  background:
+    linear-gradient(180deg, rgba(2, 18, 18, 0.98), rgba(0, 9, 9, 0.98)),
+    repeating-linear-gradient(0deg, rgba(35, 255, 126, 0.035) 0 1px, transparent 1px 4px);
+  box-shadow:
+    0 0 80px rgba(35, 255, 126, 0.16),
+    0 28px 90px rgba(0, 0, 0, 0.7);
+}
+
+.character-modal::backdrop {
+  background:
+    radial-gradient(circle at 70% 8%, rgba(35, 255, 126, 0.18), transparent 28%),
+    rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(4px);
+}
+
+.character-form {
+  position: relative;
+  padding: 22px 26px 26px;
+}
+
+.character-form::before,
+.character-form::after {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  pointer-events: none;
+  content: "";
+}
+
+.character-form::before {
+  top: 12px;
+  right: 12px;
+  border-top: 1px solid rgba(141, 255, 84, 0.62);
+  border-right: 1px solid rgba(141, 255, 84, 0.62);
+}
+
+.character-form::after {
+  bottom: 12px;
+  left: 12px;
+  border-bottom: 1px solid rgba(141, 255, 84, 0.62);
+  border-left: 1px solid rgba(141, 255, 84, 0.62);
+}
+
+.character-form-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: flex-start;
+  margin: -22px -26px 22px;
+  padding: 20px 26px 24px;
+  border-bottom: 1px solid rgba(35, 255, 126, 0.16);
+  background: rgba(0, 15, 15, 0.55);
+}
+
+.character-form-header p,
+.character-form label span {
+  color: #35ff70;
+  font-family: "Share Tech Mono", monospace;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.character-form-header p {
+  margin-bottom: 4px;
+  color: rgba(180, 210, 194, 0.62);
+}
+
+.character-form-header h2 {
+  color: #35ff70;
+  font-family: Impact, "Arial Black", system-ui, sans-serif;
+  font-size: clamp(2.4rem, 6vw, 3.2rem);
+  font-style: italic;
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 0.95;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 18px rgba(35, 255, 126, 0.46),
+    2px 2px 0 rgba(7, 49, 19, 0.88);
+  transform: skew(-5deg);
+}
+
+.modal-close-btn {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  flex: 0 0 auto;
+  border: 1px solid rgba(35, 255, 126, 0.24);
+  border-radius: 8px;
+  color: #ff4b6b;
+  background: rgba(0, 10, 10, 0.72);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.character-form-body {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 14px;
+}
+
+.character-form label {
+  display: grid;
+  gap: 8px;
+}
+
+.character-form .full-field {
+  grid-column: 1 / -1;
+}
+
+.character-form input,
+.character-form select {
+  width: 100%;
+  height: 45px;
+  padding: 0 12px;
+  border: 1px solid rgba(35, 255, 126, 0.28);
+  border-radius: 8px;
+  color: rgba(241, 255, 244, 0.92);
+  background: rgba(0, 8, 9, 0.78);
+  box-shadow: inset 0 0 18px rgba(0, 0, 0, 0.24);
+  font-family: "Share Tech Mono", monospace;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.character-form input:focus,
+.character-form select:focus {
+  border-color: rgba(141, 255, 84, 0.85);
+  box-shadow:
+    inset 0 0 18px rgba(0, 0, 0, 0.24),
+    0 0 0 2px rgba(141, 255, 84, 0.18),
+    0 0 16px rgba(35, 255, 126, 0.16);
+}
+
+.character-form input::placeholder {
+  color: rgba(190, 205, 195, 0.48);
+}
+
+.character-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.ghost-action,
+.save-action {
+  min-width: 106px;
+  min-height: 44px;
+  padding: 0 18px;
+  border: 1px solid rgba(141, 255, 84, 0.52);
+  border-radius: 8px;
+  color: #35ff70;
+  background: rgba(1, 13, 12, 0.9);
+  font-size: 0.98rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.save-action {
+  color: var(--text);
+  border-color: rgba(141, 255, 84, 0.78);
+  background: rgba(22, 82, 39, 0.48);
+}
+
+@media (max-width: 760px) {
+  .character-form-body {
+    grid-template-columns: 1fr;
+  }
+
+  .character-form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .ghost-action,
+  .save-action {
+    width: 100%;
+  }
 }
 
 /* Cards */

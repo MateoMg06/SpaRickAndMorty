@@ -14,8 +14,8 @@ export async function renderEpisodio() {
     const container = document.getElementById(
         'episodios-container'
     );
-    const characters = await getEpisodio();
-    container.innerHTML = characters
-        .map(character => episodioCard(character))
+    const episodios = await getEpisodio();
+    container.innerHTML = episodios
+        .map(episodio => episodioCard(episodio))
         .join('');
 }

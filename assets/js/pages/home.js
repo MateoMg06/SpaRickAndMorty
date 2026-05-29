@@ -20,7 +20,9 @@ export async function renderPersonajes() {
 
     const btnAbrir = document.getElementById('abrir');
     const btnCerrar = document.getElementById('cerrar');
+    const btnCancelar = document.getElementById('cancelar');
     const popup = document.getElementById('miPopup');
+    const form = document.getElementById('character-form');
 
     if (!btnAbrir || !btnCerrar || !popup) return;
 
@@ -30,6 +32,15 @@ export async function renderPersonajes() {
 
     btnCerrar.addEventListener('click', () => {
         popup.close(); // Cierra la ventana
+    });
+
+    btnCancelar?.addEventListener('click', () => {
+        popup.close();
+    });
+
+    form?.addEventListener('submit', event => {
+        event.preventDefault();
+        popup.close();
     });
 
 }
