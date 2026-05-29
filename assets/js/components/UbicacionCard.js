@@ -7,19 +7,21 @@ export function UbicacionCard(location) {
    
     return `
         <article class="card">
-            <img
-                src="${imgplanet[location.name]}"
-                alt=""
-            >
+           <div class="img-wrap">
+        <img  src="${imgplanet[location.name]}" alt="${location.name}" loading="lazy">
+
+        <div class="phosphor-over"></div>
+
+      </div>
 
             <div class="card-body">
-                <h3>${location.name}</h3>
+                <h3 class="card-name">${location.name}</h3>
                 <p>
-                    <strong>Status:</strong>
+                    <strong>Tipo:</strong>
                     ${location.type}
                 </p>
                 <p>
-                    <strong>Species:</strong>
+                    <strong>Dimension:</strong>
                     ${location.dimension}
                 </p>
             </div>

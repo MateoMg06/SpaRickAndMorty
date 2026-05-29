@@ -2,20 +2,19 @@
  * Router SPA
  */
 
-import { renderHome } from './pages/home.js';
-import { renderContacts } from './pages/contacts.js';
-import { renderAbout } from './pages/about.js';
+import { renderPersonajes } from './pages/home.js';
+import { renderInicio } from './pages/inicio.js';
+import { renderEpisodio } from './pages/episodio.js';
 import { renderUbicacion } from './pages/ubicacion.js';
+import { updateActiveNavbar } from './components/navbar.js';
 /**
  * Rutas disponibles
  */
 const routes = {
-    '/': renderHome,
-    '/contacts': renderContacts,
-    '/about': renderAbout,
-    '/Ubicaciones': renderUbicacion
-
-
+    '/':renderInicio,
+    '/personajes': renderPersonajes,
+    '/episodios': renderEpisodio,
+    '/planetas': renderUbicacion,
 };
 
 /**
@@ -25,6 +24,7 @@ export async function router() {
 
     // Obtiene ruta real
     const path = window.location.pathname;
+    updateActiveNavbar(path);
     // Busca render
     const render = routes[path];
     if (render) {

@@ -5,10 +5,10 @@ import { characterCard } from '../components/characterCard.js';
 /**
  * Renderiza Home
  */
-export async function renderHome() {
+export async function renderPersonajes() {
     const content = document.getElementById('content');
     content.innerHTML = await loadHTML(
-        './assets/js/views/home.html'
+        './assets/js/views/personajes.html'
     );
     const container = document.getElementById(
         'characters-container'
@@ -17,4 +17,32 @@ export async function renderHome() {
     container.innerHTML = characters
         .map(character => characterCard(character))
         .join('');
+
+    const btnAbrir = document.getElementById('abrir');
+    const btnCerrar = document.getElementById('cerrar');
+    const btnCancelar = document.getElementById('cancelar');
+    const popup = document.getElementById('miPopup');
+    const form = document.getElementById('character-form');
+
+    if (!btnAbrir || !btnCerrar || !popup) return;
+
+    btnAbrir.addEventListener('click', () => {
+        popup.showModal(); // Despliega la ventana
+    });
+
+    btnCerrar.addEventListener('click', () => {
+        popup.close(); // Cierra la ventana
+    });
+
+    btnCancelar?.addEventListener('click', () => {
+        popup.close();
+    });
+
+    form?.addEventListener('submit', event => {
+        event.preventDefault();
+        popup.close();
+    });
+
 }
+
+

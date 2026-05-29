@@ -3,25 +3,39 @@
  */
 
 export function characterCard(character) {
+  const status = character.status || "unknown";
+  const statusClass =
+    status.toLowerCase() === "alive"
+      ? "alive"
+      : status.toLowerCase() === "dead"
+        ? "dead"
+        : "unknown-s";
 
-    return `
-        <article class="card">
-            <img
-                src="${character.image}"
-                alt="${character.name}"
-            >
+  return `
+    <article class="card">
+      <div class="img-wrap">
+        <img src="${character.image}" alt="${character.name}" loading="lazy">
 
-            <div class="card-body">
-                <h3>${character.name}</h3>
-                <p>
-                    <strong>Status:</strong>
-                    ${character.status}
-                </p>
-                <p>
-                    <strong>Species:</strong>
-                    ${character.species}
-                </p>
-            </div>
-        </article>
-    `;
+        <div class="phosphor-over"></div>
+
+        <div class="badge-species">${(character.species || "UNKNOWN").toUpperCase()}</div>
+        <div class="badge-gender">${character.gender || "???"}</div>
+      </div>
+
+      <div class="card-body">
+        <div class="card-name" title="${character.name}">
+          ${character.name.toUpperCase()}
+        </div>
+
+        <div class="card-meta">
+          <span class="status-dot ${statusClass}"></span>
+          <span>${status.toUpperCase()}</span>
+        </div>
+
+        <div class="card-loc">
+          <span>${character.location?.name || "UNKNOWN"}</span>
+        </div>
+      </div>
+    </article>
+  `;
 }
