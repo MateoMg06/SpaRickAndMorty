@@ -1,15 +1,17 @@
 import { loadHTML } from '../utils/helpers.js';
-import { getCharacters, postNewCharacter } from '../services/api.js';
+import { getCharacters, postNewCharacter , getLocalCharacters} from '../services/api.js';
 import { characterCard } from '../components/characterCard.js';
 
 /**
  * Renderiza Home
  */
 export async function renderPersonajes() {
+
     const content = document.getElementById('content');
     content.innerHTML = await loadHTML(
         './assets/views/personajes.html'
     );
+    await loadCharacter();
     const container = document.getElementById(
         'characters-container'
     );
@@ -43,14 +45,26 @@ export async function renderPersonajes() {
         
         const Newcharacter = {
              name:document.getElementById("name").value,
-             especie:document.getElementById("especie").value,
-             genero:document.getElementById("genero").value,
-             estado:document.getElementById("estado").value
+             species:document.getElementById("especie").value,
+             gender:document.getElementById("genero").value,
+             status:document.getElementById("estado").value,
+             image:"https://rickandmortyapi.com/api/character/avatar/19.jpeg"
         }
         await postNewCharacter(Newcharacter)
+        await loadCharacter()
         popup.close();
     });
 
 }
+
+async function loadCharacter() {
+    const characters = await getLocalCharacters()
+    const container = document.getElementById("local-characters")
+    console.log(container)
+    container.innerHTML= characters.map(character => characterCard(character))
+        .join('');
+    
+}
+
 
 

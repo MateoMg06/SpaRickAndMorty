@@ -52,3 +52,8 @@ export async function postNewCharacter(character) {
         body:JSON.stringify(character)
     })
 }
+
+export async function getLocalCharacters() {
+     const res = await fetch(`${API_JSON}/character`)
+     return res.json()
+}
