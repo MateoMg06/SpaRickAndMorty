@@ -9,7 +9,7 @@ import { UbicacionCard } from '../components/UbicacionCard.js';
 export async function renderUbicacion() {
     const content = document.getElementById('content');
     content.innerHTML = await loadHTML(
-        './assets/js/views/ubicaciones.html'
+        './assets/views/ubicaciones.html'
     );
     const container = document.getElementById(
         'location-container'

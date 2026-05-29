@@ -1,0 +1,12 @@
+{
+  "character": [
+    {
+      "name": "pepe",
+      "especie": "humano",
+      "genero": "Male",
+      "estado": "Alive",
+      "id": "OesP_GmradE"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
