@@ -2,10 +2,33 @@
   "character": [
     {
       "name": "pepe",
-      "especie": "humano",
-      "genero": "Male",
-      "estado": "Alive",
+      "species": "humano",
+      "gender": "Male",
+      "status": "Alive",
       "id": "OesP_GmradE"
+    },
+    {
+      "name": "spa",
+      "species": "alien",
+      "gender": "Female",
+      "status": "Dead",
+      "id": "XZqSSkKU6TU"
+    },
+    {
+      "name": "luis",
+      "species": "robot",
+      "gender": "Male",
+      "status": "Unknown",
+      "image": "https://rickandmortyapi.com/api/character/avatar/19.jpeg",
+      "id": "vQytBWrYje0"
+    },
+    {
+      "name": "mateo",
+      "species": "alien",
+      "gender": "Unknown",
+      "status": "Alive",
+      "image": "https://rickandmortyapi.com/api/character/avatar/19.jpeg",
+      "id": "Ukkm4fjWgRo"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
