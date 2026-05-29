@@ -2,7 +2,7 @@
  * Router SPA
  */
 
-import { renderPersonajes } from './pages/home.js';
+import { renderPersonajes } from './pages/personaje.js';
 import { renderInicio } from './pages/inicio.js';
 import { renderEpisodio } from './pages/episodio.js';
 import { renderUbicacion } from './pages/ubicacion.js';
