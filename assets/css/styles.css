@@ -692,6 +692,148 @@ p {
   background: rgba(22, 82, 39, 0.48);
 }
 
+
+/* Nueva seccion en la home */
+
+
+.multiverse-stats{
+    width:100%;
+    margin-top:30px;
+
+    background:#021012;
+
+    border:1px solid rgba(0,255,180,.12);
+
+    padding:18px;
+
+    clip-path: polygon(
+        18px 0,
+        calc(100% - 18px) 0,
+        100% 18px,
+        100% calc(100% - 18px),
+        calc(100% - 18px) 100%,
+        18px 100%,
+        0 calc(100% - 18px),
+        0 18px
+    );
+}
+
+.stats-title{
+    color:#9CFF39;
+    font-size:1.5rem;
+    font-weight:700;
+    margin-bottom:15px;
+}
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.stat-card{
+
+    height:95px;
+
+    background:#010809;
+
+    border:1px solid rgba(0,255,180,.12);
+
+    position:relative;
+
+    display:flex;
+    align-items:center;
+
+    gap:20px;
+
+    padding:0 25px;
+
+    transition:.3s;
+
+    clip-path: polygon(
+        12px 0,
+        calc(100% - 12px) 0,
+        100% 12px,
+        100% calc(100% - 12px),
+        calc(100% - 12px) 100%,
+        12px 100%,
+        0 calc(100% - 12px),
+        0 12px
+    );
+}
+
+.stat-card::before{
+    content:'';
+
+    position:absolute;
+
+    top:6px;
+    left:6px;
+    right:6px;
+    bottom:6px;
+
+    border:1px solid rgba(0,255,180,.08);
+
+    pointer-events:none;
+}
+
+.stat-card:hover{
+    border-color:#85ff3b;
+
+    box-shadow:
+        0 0 10px rgba(133,255,59,.15),
+        0 0 20px rgba(133,255,59,.08);
+
+    transform:translateY(-2px);
+}
+
+.stat-card img{
+    width:42px;
+    height:42px;
+    object-fit:contain;
+    filter:brightness(1.2);
+}
+
+.stat-info{
+    display:flex;
+    flex-direction:column;
+}
+
+.number{
+    color:#9CFF39;
+    font-size:2rem;
+    font-weight:700;
+    line-height:1;
+}
+
+.label{
+    margin-top:4px;
+
+    color:#76C76A;
+
+    font-size:.85rem;
+
+    letter-spacing:.5px;
+}
+
+@media(max-width:1100px){
+
+    .stats-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:700px){
+
+    .stats-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+/*fin de la nueva seccion que gregue*/
+
 @media (max-width: 760px) {
   .character-form-body {
     grid-template-columns: 1fr;
