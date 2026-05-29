@@ -17,7 +17,7 @@ export const imgplanet={
     "St. Gloopy Noops Hospital":'assets/Img/hospital.png',
     "Earth (5-126)":'assets/Img/otroTierra.png',
     "Mr. Goldenfold's dream":'assets/Img/gold.png',
-    "Gromflom Prime":'',
+    "Gromflom Prime":'assets/Img/planetaGrom.png',
     "Earth (Replacement Dimension)":'assets/Img/tierra.png'
 
 }
