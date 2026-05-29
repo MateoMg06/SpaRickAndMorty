@@ -1,5 +1,5 @@
 import { loadHTML } from '../utils/helpers.js';
-import { getCharacters, postNewCharacter , getLocalCharacters} from '../services/api.js';
+import { getCharacters, postNewCharacter , getLocalCharacters, deleteCharacter} from '../services/api.js';
 import { characterCard } from '../components/characterCard.js';
 import { alertaExitosa, alertaConfirmacion, alertaError } from '../utils/alerts.js';
 
@@ -60,17 +60,32 @@ export async function renderPersonajes() {
       const confirmDelete = await alertaConfirmacion();
       if (!confirmDelete) return;
 
-      const deletedCharacters = getDeletedCharacters();
+      try {
+        const localCharacters = await getLocalCharacters();
+        const isLocalCharacter = localCharacters.some(char => char.id === id);
 
-      if (!deletedCharacters.includes(id)) {
-        deletedCharacters.push(id);
-        saveDeletedCharacters(deletedCharacters);
+        if (isLocalCharacter) {
+          // Eliminar del JSON server
+          await deleteCharacter(id);
+          const card = button.closest(".card");
+          if (card) card.remove();
+          await loadCharacter(); // Recargar la lista de locales
+          alertaExitosa("Personaje eliminado");
+        } else {
+          // Eliminar de la API (guardar en localStorage)
+          const deletedCharacters = getDeletedCharacters();
+          if (!deletedCharacters.includes(id)) {
+            deletedCharacters.push(id);
+            saveDeletedCharacters(deletedCharacters);
+          }
+          const card = button.closest(".card");
+          if (card) card.remove();
+          alertaExitosa("Personaje eliminado");
+        }
+      } catch (error) {
+        console.error('Error al eliminar:', error);
+        alertaError("Error al eliminar el personaje");
       }
-
-      const card = button.closest(".card");
-      if (card) card.remove();
-
-      alertaExitosa("Personaje eliminado");
     });
   });
 

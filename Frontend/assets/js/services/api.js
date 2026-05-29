@@ -57,3 +57,18 @@ export async function getLocalCharacters() {
      const res = await fetch(`${API_JSON}/character`)
      return res.json()
 }
+
+export async function deleteCharacter(id) {
+    try {
+        const res = await fetch(`${API_JSON}/character/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        return res.json();
+    } catch (error) {
+        console.error('Error deleting character:', error);
+        throw error;
+    }
+}
