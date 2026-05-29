@@ -15,15 +15,17 @@ export function episodioCard(episodio) {
         
               </div>
             <div class="card-body">
-                <h3>${episodio.name}</h3>
-                <p>
-                    <strong>Dia de lanzamiento:</strong>
-                    ${episodio.air_date}
-                </p>
-                <p>
-                    <strong>Episodio:</strong>
-                    ${episodio.episode}
-                </p>
+                <h3 class="card-name">${episodio.name}</h3>
+                <div class="episode-details">
+                    <p class="episode-info">
+                        <span class="episode-label">Lanzamiento</span>
+                        <span>${episodio.air_date}</span>
+                    </p>
+                    <p class="episode-info">
+                        <span class="episode-label">Episodio</span>
+                        <span>${episodio.episode}</span>
+                    </p>
+                </div>
             </div>
         </article>
     `;
