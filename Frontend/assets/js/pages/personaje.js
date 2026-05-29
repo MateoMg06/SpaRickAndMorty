@@ -1,6 +1,7 @@
 import { loadHTML } from '../utils/helpers.js';
 import { getCharacters, postNewCharacter , getLocalCharacters} from '../services/api.js';
 import { characterCard } from '../components/characterCard.js';
+import { alertaExitosa, alertaConfirmacion, alertaError } from '../utils/alerts.js';
 
 /**
  * Renderiza Home
@@ -18,31 +19,78 @@ export async function renderPersonajes() {
     const characters = await getCharacters();
     container.innerHTML = characters
         .map(character => characterCard(character))
-        .join('');
+        .join('')
+  const DELETED_CHARACTERS_KEY = "deleteCharacters";
 
-    const btnAbrir = document.getElementById('abrir');
-    const btnCerrar = document.getElementById('cerrar');
-    const btnCancelar = document.getElementById('cancelar');
-    const popup = document.getElementById('miPopup');
-    const form = document.getElementById('character-form');
+  function getDeletedCharacters() {
+    return JSON.parse(localStorage.getItem(DELETED_CHARACTERS_KEY)) || [];
+  }
 
-    if (!btnAbrir || !btnCerrar || !popup) return;
+  function saveDeletedCharacters(deletedCharacters) {
+    localStorage.setItem(
+      DELETED_CHARACTERS_KEY,
+      JSON.stringify(deletedCharacters)
+    );
+  }
 
-    btnAbrir.addEventListener('click', () => {
-        popup.showModal(); // Despliega la ventana
+  const btnAbrir = document.getElementById("abrir");
+  const btnCerrar = document.getElementById("cerrar");
+  const btnCancelar = document.getElementById("cancelar");
+  const popup = document.getElementById("miPopup");
+  const form = document.getElementById("character-form");
+  const deletedCharacters = getDeletedCharacters();
+
+  const visibleCharacters = characters.filter(
+    (character) => !deletedCharacters.includes(String(character.id)),
+  );
+
+  container.innerHTML = visibleCharacters
+    .map((character) => characterCard(character))
+    .join("");
+
+  /**
+   * Eliminar
+   */
+
+  const deleteButtons = document.querySelectorAll(".delete-btn");
+
+  deleteButtons.forEach((button) => {
+    button.addEventListener("click", async () => {
+      const id = button.dataset.id;
+      const confirmDelete = await alertaConfirmacion();
+      if (!confirmDelete) return;
+
+      const deletedCharacters = getDeletedCharacters();
+
+      if (!deletedCharacters.includes(id)) {
+        deletedCharacters.push(id);
+        saveDeletedCharacters(deletedCharacters);
+      }
+
+      const card = button.closest(".card");
+      if (card) card.remove();
+
+      alertaExitosa("Personaje eliminado");
     });
+  });
 
-    btnCerrar.addEventListener('click', () => {
-        popup.close(); // Cierra la ventana
-    });
+  if (!btnAbrir || !btnCerrar || !popup) return;
 
-    btnCancelar?.addEventListener('click', () => {
-        popup.close();
-    });
+  btnAbrir.addEventListener("click", () => {
+    popup.showModal(); // Despliega la ventana
+  });
 
-    form?.addEventListener('submit', async event => {
-        event.preventDefault();
-        
+  btnCerrar.addEventListener("click", () => {
+    popup.close(); // Cierra la ventana
+  });
+
+  btnCancelar?.addEventListener("click", () => {
+    popup.close();
+  });
+
+  form?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
         const Newcharacter = {
              name:document.getElementById("name").value,
              species:document.getElementById("especie").value,
@@ -53,8 +101,8 @@ export async function renderPersonajes() {
         await postNewCharacter(Newcharacter)
         await loadCharacter()
         popup.close();
-    });
 
+  });
 }
 
 async function loadCharacter() {

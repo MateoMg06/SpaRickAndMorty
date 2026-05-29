@@ -14,7 +14,7 @@ import httpClient from './httpClient.js';
 export async function getCharacters() {
     try {
         const response = await httpClient.get('/character');
-        return response.data.results;
+        return response.data.results || [];
 
     } catch (error) {
         console.error(error);

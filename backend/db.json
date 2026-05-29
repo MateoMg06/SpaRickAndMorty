@@ -29,6 +29,22 @@
       "status": "Alive",
       "image": "https://rickandmortyapi.com/api/character/avatar/19.jpeg",
       "id": "Ukkm4fjWgRo"
+    },
+    {
+      "name": "jamon",
+      "species": "robot",
+      "gender": "Female",
+      "status": "Alive",
+      "image": "https://rickandmortyapi.com/api/character/avatar/19.jpeg",
+      "id": "jJoF_iKpkUI"
+    },
+    {
+      "name": "felipe",
+      "species": "humano",
+      "gender": "Male",
+      "status": "Dead",
+      "image": "https://rickandmortyapi.com/api/character/avatar/19.jpeg",
+      "id": "aI3N5edo75E"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
