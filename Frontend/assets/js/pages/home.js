@@ -91,6 +91,6 @@ export async function renderPersonajes() {
     };
 
     await postNewCharacter(Newcharacter);
-    popup.close();
+   popup.close();
   });
 }
