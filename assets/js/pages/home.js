@@ -1,48 +1,54 @@
-import { loadHTML } from '../utils/helpers.js';
-import { getCharacters } from '../services/api.js';
-import { characterCard } from '../components/characterCard.js';
+import { loadHTML } from "../utils/helpers.js";
+import { getCharacters } from "../services/api.js";
+import { characterCard } from "../components/characterCard.js";
 
 /**
  * Renderiza Home
  */
 export async function renderPersonajes() {
-    const content = document.getElementById('content');
-    content.innerHTML = await loadHTML(
-        './assets/js/views/personajes.html'
+  const content = document.getElementById("content");
+  content.innerHTML = await loadHTML("./assets/js/views/personajes.html");
+  const DELETED_CHARACTERS_KEY = "deleteCharacters";
+
+  function getDeletedCharacters() {
+    return JSON.parse(localStorage.getItem(DELETED_CHARACTERS_KEY)) || [];
+  }
+
+  function saveDeletedCharacters(deletedCharacters) {
+    localStorage.setItem(
+      DELETED_CHARACTERS_KEY,
+      JSON.stringify(deletedCharacters),
     );
-    const container = document.getElementById(
-        'characters-container'
-    );
-    const characters = await getCharacters();
-    container.innerHTML = characters
-        .map(character => characterCard(character))
-        .join('');
+  }
 
-    const btnAbrir = document.getElementById('abrir');
-    const btnCerrar = document.getElementById('cerrar');
-    const btnCancelar = document.getElementById('cancelar');
-    const popup = document.getElementById('miPopup');
-    const form = document.getElementById('character-form');
+  const container = document.getElementById("characters-container");
+  const characters = await getCharacters();
+  container.innerHTML = characters
+    .map((character) => characterCard(character))
+    .join("");
 
-    if (!btnAbrir || !btnCerrar || !popup) return;
+  const btnAbrir = document.getElementById("abrir");
+  const btnCerrar = document.getElementById("cerrar");
+  const btnCancelar = document.getElementById("cancelar");
+  const popup = document.getElementById("miPopup");
+  const form = document.getElementById("character-form");
 
-    btnAbrir.addEventListener('click', () => {
-        popup.showModal(); // Despliega la ventana
-    });
+  if (!btnAbrir || !btnCerrar || !popup) return;
 
-    btnCerrar.addEventListener('click', () => {
-        popup.close(); // Cierra la ventana
-    });
+  btnAbrir.addEventListener("click", () => {
+    popup.showModal(); // Despliega la ventana
+  });
 
-    btnCancelar?.addEventListener('click', () => {
-        popup.close();
-    });
+  btnCerrar.addEventListener("click", () => {
+    popup.close(); // Cierra la ventana
+  });
 
-    form?.addEventListener('submit', event => {
-        event.preventDefault();
-        popup.close();
-    });
+  btnCancelar?.addEventListener("click", () => {
+    popup.close();
+  });
 
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    popup.close();
+  });
 }
-
-
