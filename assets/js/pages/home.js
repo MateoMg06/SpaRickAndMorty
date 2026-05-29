@@ -23,9 +23,6 @@ export async function renderPersonajes() {
 
   const container = document.getElementById("characters-container");
   const characters = await getCharacters();
-  container.innerHTML = characters
-    .map((character) => characterCard(character))
-    .join("");
 
   const btnAbrir = document.getElementById("abrir");
   const btnCerrar = document.getElementById("cerrar");
@@ -33,10 +30,41 @@ export async function renderPersonajes() {
   const popup = document.getElementById("miPopup");
   const form = document.getElementById("character-form");
   const deletedCharacters = getDeletedCharacters();
-  
-    const visibleCharacters = characters.filter(
-        character => !deletedCharacters.includes(String(character.id))
-    );
+
+  const visibleCharacters = characters.filter(
+    (character) => !deletedCharacters.includes(String(character.id)),
+  );
+
+  container.innerHTML = visibleCharacters
+    .map((character) => characterCard(character))
+    .join("");
+
+  /**
+   * Eliminar
+   */
+  const deleteButtons = document.querySelectorAll(".delete-btn");
+
+  deleteButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const id = button.dataset.id;
+      const confirmDelete = confirm(
+        "Seguro que quieres eliminar este personaje?",
+      );
+      if (!confirmDelete) return;
+
+      const deletedCharacters = getDeletedCharacters();
+
+      if (!deletedCharacters.includes(id)) {
+        deletedCharacters.push(id);
+        saveDeletedCharacters(deletedCharacters);
+      }
+
+      const card = button.closest(".card");
+      if (card) card.remove();
+
+      alert("Personaje eliminado");
+    });
+  });
 
   if (!btnAbrir || !btnCerrar || !popup) return;
 

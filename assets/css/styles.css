@@ -907,6 +907,58 @@ p {
   white-space: nowrap;
 }
 
+.card-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.edit-btn,
+.delete-btn {
+  min-height: 34px;
+  padding: 0 9px;
+  border: 1px solid rgba(141, 255, 84, 0.34);
+  border-radius: 8px;
+  color: var(--text);
+  background: rgba(1, 13, 12, 0.82);
+  font-family: "Share Tech Mono", monospace;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    border-color 0.18s ease,
+    background 0.18s ease,
+    box-shadow 0.18s ease,
+    transform 0.18s ease;
+}
+
+.edit-btn {
+  color: var(--cyan);
+  border-color: rgba(53, 245, 208, 0.42);
+}
+
+.delete-btn {
+  color: var(--red);
+  border-color: rgba(255, 75, 107, 0.42);
+}
+
+.edit-btn:hover {
+  border-color: rgba(53, 245, 208, 0.78);
+  background: rgba(8, 44, 42, 0.9);
+  box-shadow: 0 0 14px rgba(53, 245, 208, 0.16);
+  transform: translateY(-1px);
+}
+
+.delete-btn:hover {
+  border-color: rgba(255, 75, 107, 0.78);
+  background: rgba(52, 8, 18, 0.9);
+  box-shadow: 0 0 14px rgba(255, 75, 107, 0.16);
+  transform: translateY(-1px);
+}
+
 .status-dot {
   width: 7px;
   height: 7px;
