@@ -18,12 +18,14 @@ export function UbicacionCard(location) {
                 <h3 class="card-name">${location.name}</h3>
                 <div class="location-details">
                     <p class="location-info">
+                        <span class="info-icon planet-icon" aria-hidden="true"></span>
                         <span class="location-label">Tipo</span>
-                        <span>${location.type}</span>
+                        <span class="info-value">${location.type}</span>
                     </p>
                     <p class="location-info">
+                        <span class="info-icon portal-icon" aria-hidden="true"></span>
                         <span class="location-label">Dimension</span>
-                        <span>${location.dimension}</span>
+                        <span class="info-value">${location.dimension}</span>
                     </p>
                 </div>
             </div>
