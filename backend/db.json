@@ -1,20 +1,12 @@
 {
   "character": [
     {
-      "name": "Felipe prueba",
-      "species": "humano",
-      "gender": "Male",
-      "status": "Alive",
+      "name": "Daniel",
+      "species": "Human",
+      "gender": "Unknown",
+      "status": "Dead",
       "image": "https://rickandmortyapi.com/api/character/avatar/19.jpeg",
-      "id": "aI3N5edo75E"
-    },
-    {
-      "name": "algo",
-      "species": "huma",
-      "gender": "Male",
-      "status": "Alive",
-      "image": "https://rickandmortyapi.com/api/character/avatar/19.jpeg",
-      "id": "GmRB-fWrSu8"
+      "id": "C95w_w2MOPk"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
