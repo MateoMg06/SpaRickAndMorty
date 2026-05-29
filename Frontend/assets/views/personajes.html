@@ -1,0 +1,80 @@
+<section class="database-view">
+    <div class="view-toolbar">
+        <button class="add-character-btn" id="abrir" type="button">+ AÑADIR PERSONAJE</button>
+    </div>
+
+    <header class="view-console-header">
+        <div>
+            <h1>// CHARACTERS_DB //</h1>
+            <p>Registros API disponibles para exploracion.</p>
+        </div>
+    </header>
+
+    <section class="local-characters-section">
+        <h2>// MIS PERSONAJES //</h2>
+        <div id="local-characters" class="card-grid"></div>
+    </section>
+
+    <section class="api-characters-section">
+        <h2>// PERSONAJES API //</h2>
+        <div id="characters-container" class="card-grid"></div>
+    </section>
+</section>
+
+<dialog class="character-modal" id="miPopup" aria-labelledby="character-modal-title">
+    <form class="character-form" id="character-form" method="dialog">
+        <div class="character-form-header">
+            <div>
+                <p>&gt; LOCAL_CHARACTER_CREATOR.EXE</p>
+                <h2 id="character-modal-title">NUEVO PERSONAJE</h2>
+            </div>
+            <button class="modal-close-btn" id="cerrar" type="button" aria-label="Cerrar">x</button>
+        </div>
+
+        <div class="character-form-body">
+            <label>
+                <span>NOMBRE</span>
+                <input id="name" type="text" placeholder="Ej: Toxic Summer">
+            </label>
+
+            <label>
+                <span>ESPECIE</span>
+                <input id="especie" type="text" placeholder="Human, Alien, Robot...">
+            </label>
+
+            <label>
+                <span>ESTADO</span>
+                <select id="estado" value="">
+                    <option>Alive</option>
+                    <option>Dead</option>
+                    <option>Unknown</option>
+                </select>
+            </label>
+
+            <label>
+                <span>GENERO</span>
+                <select id="genero" value="">
+                    <option>Female</option>
+                    <option>Male</option>
+                    <option>Genderless</option>
+                    <option>Unknown</option>
+                </select>
+            </label>
+
+            <label class="full-field">
+                <span>IMAGEN URL</span>
+                <input type="url" placeholder="https://...">
+            </label>
+
+            <label class="full-field">
+                <span>UBICATION</span>
+                <input type="text" placeholder="Dimension propia, nave, planeta...">
+            </label>
+        </div>
+
+        <div class="character-form-actions">
+            <button class="ghost-action" id="cancelar" type="button">CANCEL</button>
+            <button class="save-action" id="guardar-personaje" type="submit">SAVE CHAR</button>
+        </div>
+    </form>
+</dialog>
