@@ -511,6 +511,9 @@ p {
   width: min(720px, calc(100vw - 40px));
   padding: 0;
   overflow: visible;
+  top:50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   border: 1px solid rgba(35, 255, 126, 0.28);
   border-radius: 10px;
   color: var(--text);
