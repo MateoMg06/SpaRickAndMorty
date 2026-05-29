@@ -1,0 +1,49 @@
+{
+   "action": {
+      "default_icon": {
+         "128": "icons/standard-128.png",
+         "16": "icons/standard-16.png",
+         "48": "icons/standard-48.png",
+         "64": "icons/standard-64.png"
+      },
+      "default_popup": "index.html",
+      "default_title": "ZenMate"
+   },
+   "analytics": {
+      "measurement_id": "G-7ZCDMP4R7H"
+   },
+   "background": {
+      "service_worker": "background.js"
+   },
+   "content_scripts": [ {
+      "js": [ "assets/libs/crypto.js", "runtime.js", "page_api.js" ],
+      "matches": [ "*://*.zenmate.com/*", "*://*.zenmate.io/*" ],
+      "run_at": "document_end"
+   } ],
+   "content_security_policy": {
+      "extension_pages": "script-src 'self' ; object-src 'self' ",
+      "sandbox": "sandbox allow-scripts; script-src 'self'; object-src 'self'"
+   },
+   "default_locale": "en",
+   "description": "__MSG_appDesc__",
+   "host_permissions": [ "*://*/*" ],
+   "icons": {
+      "128": "icons/standard-128.png",
+      "16": "icons/standard-16.png",
+      "48": "icons/standard-48.png",
+      "64": "icons/standard-64.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqgLa5PC76o2S7BaSpbf899iCg1D9wDJIkg56uVxz9KneL65nJhju4tEiAGKV4GCwQVvZEtu24Kj2XyUMBW52WHQNmy9BvOtPpSj719ZE/vplvDzsFBqAoChINtzFEizW3nKe8IUYas1xQlyB1bDgaEtN5NHIrpjNMQsLMSY5m/A6ngzY5Jtt+JI913Mkg/YtnB02PmvactTdYXiErLFe4rGlmD3iEG4p7MJHQ2zxXa+Iok1uQVNnFAEuzie2LTnXr+mfq28CVCc0GfItRuJjwyJUsqItQoFEyxAz6x45eB/RxDGwN6pTPu62S53330YKYn47wWVTovzZgSG8pifuuwIDAQAB",
+   "manifest_version": 3,
+   "name": "__MSG_appName__",
+   "permissions": [ "activeTab", "background", "tabs", "proxy", "unlimitedStorage", "storage", "notifications", "cookies", "alarms", "browsingData", "webNavigation", "privacy", "scripting", "https://www.google-analytics.com/*" ],
+   "short_name": "ZenMate VPN",
+   "update_url": "https://edge.microsoft.com/extensionwebstorebase/v1/crx",
+   "version": "9.0.1",
+   "web_accessible_resources": [ {
+      "extension_ids": [  ],
+      "matches": [ "*://*.zenmate.com/*" ],
+      "resources": [ "assets/css/*", "assets/libs/crypto.js", "script.js" ],
+      "use_dynamic_url": true
+   } ]
+}

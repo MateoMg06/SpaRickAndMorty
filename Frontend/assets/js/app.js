@@ -30,10 +30,10 @@ window.addEventListener('DOMContentLoaded', async () => {
      * Intercepta links SPA
      */
     document.body.addEventListener('click', event => {
-        const target = event.target;
-        if (target.matches('[data-link]')) {
+        const target = event.target.closest('[data-link]');
+        if (target) {
             event.preventDefault();
-            navigateTo(target.href);
+            navigateTo(target.pathname);
         }
     });
 });

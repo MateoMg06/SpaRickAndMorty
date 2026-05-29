@@ -1,19 +1,20 @@
 {
   "character": [
     {
-      "name": "pepe",
-      "species": "humano",
-      "gender": "Male",
-      "status": "Alive",
-      "id": "OesP_GmradE"
-    },
-    {
       "name": "Felipe prueba",
       "species": "humano",
       "gender": "Male",
       "status": "Alive",
       "image": "https://rickandmortyapi.com/api/character/avatar/19.jpeg",
       "id": "aI3N5edo75E"
+    },
+    {
+      "name": "algo",
+      "species": "huma",
+      "gender": "Male",
+      "status": "Alive",
+      "image": "https://rickandmortyapi.com/api/character/avatar/19.jpeg",
+      "id": "GmRB-fWrSu8"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
