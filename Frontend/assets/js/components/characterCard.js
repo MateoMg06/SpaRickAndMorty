@@ -2,7 +2,7 @@
  * Character Card Component
  */
 
-export function characterCard(character) {
+export function characterCard(character, source = 'local') {
   const status = character.status || "unknown";
   const statusClass =
     status.toLowerCase() === "alive"
@@ -36,7 +36,7 @@ export function characterCard(character) {
           <span>${character.location?.name || "UNKNOWN"}</span>
         </div>
         <div class="card-actions">
-          <button class="edit-btn" type="button">Editar</button>
+          <button class="edit-btn" type="button" data-id="${character.id}" data-source="${source}">Editar</button>
           <button class="delete-btn" type="button" data-id="${character.id}">Eliminar</button>
         </div>
       </div>

@@ -1,133 +1,199 @@
 import { loadHTML } from '../utils/helpers.js';
-import { getCharacters, postNewCharacter , getLocalCharacters, deleteCharacter} from '../services/api.js';
+import {
+    getCharacters,
+    postNewCharacter,
+    getLocalCharacters,
+    deleteCharacter,
+    updateLocalCharacter,
+    getEditedApiCharacters,
+    saveEditedApiCharacter
+} from '../services/api.js';
 import { characterCard } from '../components/characterCard.js';
 import { alertaExitosa, alertaConfirmacion, alertaError } from '../utils/alerts.js';
 
-/**
- * Renderiza Home
- */
+const DELETED_KEY = "deleteCharacters";
+
+function getDeletedIds() {
+    return JSON.parse(localStorage.getItem(DELETED_KEY)) || [];
+}
+
+function saveDeletedIds(ids) {
+    localStorage.setItem(DELETED_KEY, JSON.stringify(ids));
+}
+
+function capitalize(str) {
+    if (!str) return '';
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
 export async function renderPersonajes() {
-
     const content = document.getElementById('content');
-    content.innerHTML = await loadHTML(
-        './assets/views/personajes.html'
-    );
-    await loadCharacter();
-    const container = document.getElementById(
-        'characters-container'
-    );
-    const characters = await getCharacters();
-    container.innerHTML = characters
-        .map(character => characterCard(character))
-        .join('')
-  const DELETED_CHARACTERS_KEY = "deleteCharacters";
+    content.innerHTML = await loadHTML('./assets/views/personajes.html');
 
-  function getDeletedCharacters() {
-    return JSON.parse(localStorage.getItem(DELETED_CHARACTERS_KEY)) || [];
-  }
+    let allApiCharacters = [];
+    let visibleApiCharacters = [];
+    let localCharactersCache = [];
 
-  function saveDeletedCharacters(deletedCharacters) {
-    localStorage.setItem(
-      DELETED_CHARACTERS_KEY,
-      JSON.stringify(deletedCharacters)
-    );
-  }
+    const apiContainer = document.getElementById('characters-container');
+    const popup = document.getElementById("miPopup");
+    const form = document.getElementById("character-form");
+    const modalTitle = document.getElementById("character-modal-title");
+    const saveBtn = document.getElementById("guardar-personaje");
 
-  const btnAbrir = document.getElementById("abrir");
-  const btnCerrar = document.getElementById("cerrar");
-  const btnCancelar = document.getElementById("cancelar");
-  const popup = document.getElementById("miPopup");
-  const form = document.getElementById("character-form");
-  const deletedCharacters = getDeletedCharacters();
+    // Estado de edición
+    let editMode = false;
+    let editCharacterId = null;
+    let editCharacterSource = null;
 
-  const visibleCharacters = characters.filter(
-    (character) => !deletedCharacters.includes(String(character.id)),
-  );
+    function buildVisibleApiCharacters() {
+        const edited = getEditedApiCharacters();
+        const deletedIds = getDeletedIds();
+        return allApiCharacters
+            .filter(c => !deletedIds.includes(String(c.id)))
+            .map(c => {
+                const override = edited[String(c.id)];
+                return override ? { ...c, ...override } : c;
+            });
+    }
 
-  container.innerHTML = visibleCharacters
-    .map((character) => characterCard(character))
-    .join("");
+    async function loadLocalCharacters() {
+        localCharactersCache = await getLocalCharacters();
+        const container = document.getElementById("local-characters");
+        container.innerHTML = localCharactersCache
+            .map(c => characterCard(c, 'local'))
+            .join('');
+        attachButtonListeners(container);
+    }
 
-  /**
-   * Eliminar
-   */
+    function renderApiCharacters() {
+        visibleApiCharacters = buildVisibleApiCharacters();
+        apiContainer.innerHTML = visibleApiCharacters
+            .map(c => characterCard(c, 'api'))
+            .join('');
+        attachButtonListeners(apiContainer);
+    }
 
-  const deleteButtons = document.querySelectorAll(".delete-btn");
+    function attachButtonListeners(container) {
+        container.querySelectorAll('.edit-btn').forEach(btn => {
+            btn.addEventListener('click', handleEditClick);
+        });
+        container.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.addEventListener('click', handleDeleteClick);
+        });
+    }
 
-  deleteButtons.forEach((button) => {
-    button.addEventListener("click", async () => {
-      const id = button.dataset.id;
-      const confirmDelete = await alertaConfirmacion();
-      if (!confirmDelete) return;
+    async function handleEditClick(event) {
+        const btn = event.currentTarget;
+        const id = btn.dataset.id;
+        const source = btn.dataset.source;
+        let character = null;
 
-      try {
-        const localCharacters = await getLocalCharacters();
-        const isLocalCharacter = localCharacters.some(char => char.id === id);
-
-        if (isLocalCharacter) {
-          // Eliminar del JSON server
-          await deleteCharacter(id);
-          const card = button.closest(".card");
-          if (card) card.remove();
-          await loadCharacter(); // Recargar la lista de locales
-          alertaExitosa("Personaje eliminado");
+        if (source === 'api') {
+            character = visibleApiCharacters.find(c => String(c.id) === String(id));
         } else {
-          // Eliminar de la API (guardar en localStorage)
-          const deletedCharacters = getDeletedCharacters();
-          if (!deletedCharacters.includes(id)) {
-            deletedCharacters.push(id);
-            saveDeletedCharacters(deletedCharacters);
-          }
-          const card = button.closest(".card");
-          if (card) card.remove();
-          alertaExitosa("Personaje eliminado");
+            character = localCharactersCache.find(c => String(c.id) === String(id));
         }
-      } catch (error) {
-        console.error('Error al eliminar:', error);
-        alertaError("Error al eliminar el personaje");
-      }
+
+        if (!character) return;
+
+        editMode = true;
+        editCharacterId = id;
+        editCharacterSource = source;
+
+        modalTitle.textContent = 'EDITAR PERSONAJE';
+        saveBtn.textContent = 'UPDATE CHAR';
+
+        document.getElementById('name').value = character.name || '';
+        document.getElementById('especie').value = character.species || '';
+        document.getElementById('estado').value = capitalize(character.status) || 'Alive';
+        document.getElementById('genero').value = capitalize(character.gender) || 'Female';
+
+        popup.showModal();
+    }
+
+    async function handleDeleteClick(event) {
+        const btn = event.currentTarget;
+        const id = btn.dataset.id;
+        const confirmed = await alertaConfirmacion();
+        if (!confirmed) return;
+
+        try {
+            const isLocal = localCharactersCache.some(c => String(c.id) === String(id));
+
+            if (isLocal) {
+                await deleteCharacter(id);
+                await loadLocalCharacters();
+                alertaExitosa("Personaje eliminado");
+            } else {
+                const deletedIds = getDeletedIds();
+                if (!deletedIds.includes(String(id))) {
+                    deletedIds.push(String(id));
+                    saveDeletedIds(deletedIds);
+                }
+                renderApiCharacters();
+                alertaExitosa("Personaje eliminado");
+            }
+        } catch (error) {
+            console.error('Error al eliminar:', error);
+            alertaError("Error al eliminar el personaje");
+        }
+    }
+
+    // Carga inicial
+    allApiCharacters = await getCharacters();
+    renderApiCharacters();
+    await loadLocalCharacters();
+
+    // Botón abrir modal (crear)
+    document.getElementById("abrir").addEventListener("click", () => {
+        editMode = false;
+        editCharacterId = null;
+        editCharacterSource = null;
+        modalTitle.textContent = 'NUEVO PERSONAJE';
+        saveBtn.textContent = 'SAVE CHAR';
+        form.reset();
+        popup.showModal();
     });
-  });
 
-  if (!btnAbrir || !btnCerrar || !popup) return;
+    document.getElementById("cerrar").addEventListener("click", () => popup.close());
+    document.getElementById("cancelar")?.addEventListener("click", () => popup.close());
 
-  btnAbrir.addEventListener("click", () => {
-    popup.showModal(); // Despliega la ventana
-  });
+    form?.addEventListener("submit", async (event) => {
+        event.preventDefault();
 
-  btnCerrar.addEventListener("click", () => {
-    popup.close(); // Cierra la ventana
-  });
+        const formData = {
+            name: document.getElementById("name").value,
+            species: document.getElementById("especie").value,
+            gender: document.getElementById("genero").value,
+            status: document.getElementById("estado").value,
+        };
 
-  btnCancelar?.addEventListener("click", () => {
-    popup.close();
-  });
-
-  form?.addEventListener("submit", async (event) => {
-    event.preventDefault();
-
-        const Newcharacter = {
-             name:document.getElementById("name").value,
-             species:document.getElementById("especie").value,
-             gender:document.getElementById("genero").value,
-             status:document.getElementById("estado").value,
-             image:"https://rickandmortyapi.com/api/character/avatar/19.jpeg"
+        try {
+            if (editMode) {
+                if (editCharacterSource === 'local') {
+                    // Actualizar en el archivo JSON via json-server
+                    const existing = localCharactersCache.find(c => String(c.id) === String(editCharacterId));
+                    await updateLocalCharacter(editCharacterId, { ...existing, ...formData });
+                    await loadLocalCharacters();
+                } else {
+                    // Guardar edición de personaje API en localStorage
+                    saveEditedApiCharacter(editCharacterId, formData);
+                    renderApiCharacters();
+                }
+                alertaExitosa("Personaje actualizado");
+            } else {
+                await postNewCharacter({
+                    ...formData,
+                    image: "https://rickandmortyapi.com/api/character/avatar/19.jpeg"
+                });
+                await loadLocalCharacters();
+                alertaExitosa("Personaje creado");
+            }
+        } catch (error) {
+            console.error('Error al guardar:', error);
+            alertaError("Error al guardar el personaje");
         }
-        await postNewCharacter(Newcharacter)
-        await loadCharacter()
+
         popup.close();
-
-  });
+    });
 }
-
-async function loadCharacter() {
-    const characters = await getLocalCharacters()
-    const container = document.getElementById("local-characters")
-    console.log(container)
-    container.innerHTML= characters.map(character => characterCard(character))
-        .join('');
-    
-}
-
-
-

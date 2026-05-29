@@ -58,6 +58,27 @@ export async function getLocalCharacters() {
      return res.json()
 }
 
+export async function updateLocalCharacter(id, character) {
+    const res = await fetch(`${API_JSON}/character/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(character)
+    });
+    return res.json();
+}
+
+const EDITED_API_KEY = 'editedApiCharacters';
+
+export function getEditedApiCharacters() {
+    return JSON.parse(localStorage.getItem(EDITED_API_KEY)) || {};
+}
+
+export function saveEditedApiCharacter(id, data) {
+    const edited = getEditedApiCharacters();
+    edited[String(id)] = data;
+    localStorage.setItem(EDITED_API_KEY, JSON.stringify(edited));
+}
+
 export async function deleteCharacter(id) {
     try {
         const res = await fetch(`${API_JSON}/character/${id}`, {

@@ -8,10 +8,10 @@
       "id": "OesP_GmradE"
     },
     {
-      "name": "felipe",
+      "name": "Felipe prueba",
       "species": "humano",
       "gender": "Male",
-      "status": "Dead",
+      "status": "Alive",
       "image": "https://rickandmortyapi.com/api/character/avatar/19.jpeg",
       "id": "aI3N5edo75E"
     }
